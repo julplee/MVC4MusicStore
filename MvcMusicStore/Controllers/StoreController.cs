@@ -9,17 +9,13 @@
 
     public class StoreController : Controller
     {
+        private MusicStoreEntities storeDb = new MusicStoreEntities();
+
         //
         // GET: /Store/
         public ActionResult Index()
         {
-            var genres = new List<Genre>
-            {
-                new Genre { Name = "Disco"},
-                new Genre { Name = "Jazz"},
-                new Genre { Name = "Rock"}
-            };
-
+            var genres = storeDb.Genres.ToList();
             return View(genres);
         }
 
@@ -27,7 +23,10 @@
         // GET: /Store/Browse?genre=disco
         public ActionResult Browse(string genre)
         {
-            var genreModel = new Genre { Name = genre };
+            // Retrieve Genre and its Associated Albums from database
+            var genreModel = storeDb.Genres.Include("Albums")
+                .Single(g => g.Name == genre);
+
             return View(genreModel);
         }
 
