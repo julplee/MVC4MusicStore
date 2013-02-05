@@ -34,8 +34,8 @@
         // GET: /Store/Details/5
         public ActionResult Details(int id)
         {
-            var album = new Album { Title = "Album " + id };
-            return View(album);
+            var genre = new Genre { Name= "Genre " + id };
+            return View(genre);
         }
     }
 }
