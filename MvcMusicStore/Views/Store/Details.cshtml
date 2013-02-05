@@ -1,14 +1,30 @@
-﻿@model MvcMusicStore.Models.Genre
+﻿﻿@model MvcMusicStore.Models.Album
 @{
     ViewBag.Title = "Browse";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Browsing Genre: @Model.Name</h2>
-<ul>
-    @foreach (var album in Model.Albums)
-    {
-        <li>
-            @Html.ActionLink(album.Title, "Details", new { id = album.AlbumId })
-        </li>
-    }
-</ul>
+
+<h2>@Model.Title</h2>
+
+<p>
+   <img alt="@Model.Title" src="@Model.AlbumArtUrl" />
+</p>
+
+<div id="album-details">
+   <p>
+       <em>Genre:</em>
+       @Model.Genre.Name
+   </p>
+   <p>
+       <em>Artist:</em>
+       @Model.Artist.Name
+   </p>
+   <p>
+       <em>Price:</em>
+       @String.Format("{0:F}", Model.Price)
+   </p>
+   <p class="button">
+       @Html.ActionLink("Add to cart", "AddToCart", 
+       "ShoppingCart", new { id = Model.AlbumId }, "")
+   </p>
+</div>

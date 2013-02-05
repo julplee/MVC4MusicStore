@@ -6,14 +6,32 @@ using System.Web.Mvc;
 
 namespace MvcMusicStore.Controllers
 {
+    using MvcMusicStore.Models;
+
     public class HomeController : Controller
     {
         //
         // GET: /Home/
+        MusicStoreEntities storeDB = new MusicStoreEntities();
+
         public ActionResult Index()
         {
-            return this.View();
+            // Get most popular albums
+            //var albums = GetTopSellingAlbums(5);
+            var albums = storeDB.Albums.ToList();
+
+            return View(albums);
         }
 
+        //private List<Album> GetTopSellingAlbums(int count)
+        //{
+        //    // Group the order details by album and return
+        //    // the albums with the highest count
+
+        //    return storeDB.Albums
+        //        .OrderByDescending(a => a.OrderDetails.Count())
+        //        .Take(count)
+        //        .ToList();
+        //}
     }
 }

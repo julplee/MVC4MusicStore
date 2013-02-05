@@ -34,8 +34,9 @@
         // GET: /Store/Details/5
         public ActionResult Details(int id)
         {
-            var genre = new Genre { Name= "Genre " + id };
-            return View(genre);
+            var album = storeDb.Albums.Find(id);
+
+            return View(album);
         }
     }
 }
