@@ -23,6 +23,10 @@ rel="stylesheet" type="text/css" />
         </ul>
     </div>
     @RenderBody()
-    @RenderSection("Scripts")
+    
+    @if (IsSectionDefined("scripts"))
+    {
+        @RenderSection("scripts")
+    }
 </body>
 </html>
